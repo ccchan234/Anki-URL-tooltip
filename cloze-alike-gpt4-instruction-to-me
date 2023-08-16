@@ -1,0 +1,41 @@
+Keeping both scripts (the one inside the `revealCloze` function and the one outside) will ensure that hyperlinks both inside and outside the cloze deletions have tooltips.
+
+1. **The script inside the `revealCloze` function** will handle the hyperlinks inside the cloze deletions, updating the `title` attributes when each cloze deletion is revealed.
+
+2. **The separate script outside the cloze handling code** will handle the hyperlinks outside the cloze deletions, updating the `title` attributes when the card is initially displayed.
+
+By keeping both scripts, you should ensure that all hyperlinks, whether inside or outside the cloze deletions, have tooltips displaying the URLs.
+
+Here's a summary of what you should have:
+
+- Inside the `revealCloze` function (to handle links inside cloze deletions):
+
+```javascript
+function revealCloze(i) {
+  if (!revealed[i]) {
+    elements[i].innerHTML = clozes[i];
+    revealed[i] = true;
+
+    // Add this code to update the title attributes of the hyperlinks inside the revealed cloze deletion
+    elements[i].querySelectorAll('a').forEach(function(link) {
+      link.title = link.href;
+    });
+  }
+}
+```
+
+- At the end of the front and back templates (to handle links outside cloze deletions):
+
+```html
+<script>
+  document.querySelectorAll('a').forEach(function(link) {
+    link.title = link.href;
+  });
+</script>
+```
+
+This combination should achieve the desired behavior. As always, please test these changes thoroughly to make sure they work as expected, and remember to back up your Anki collection before making significant changes to your card templates.
+
+
+
+working, 
