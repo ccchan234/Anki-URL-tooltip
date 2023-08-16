@@ -1,0 +1,11 @@
+function revealCloze(i) {
+  if (!revealed[i]) {
+    elements[i].innerHTML = clozes[i];
+    revealed[i] = true;
+
+    // Add this code to update the title attributes of the hyperlinks inside the revealed cloze deletion
+    elements[i].querySelectorAll('a').forEach(function(link) {
+      link.title = link.href;
+    });
+  }
+}
